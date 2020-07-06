@@ -30,7 +30,7 @@ spec:
   selector:
     app: auth
   ports:
-    - name: db
+    - name: auth
       protocol: TCP
       port: 3000
       targetPort: 3000
