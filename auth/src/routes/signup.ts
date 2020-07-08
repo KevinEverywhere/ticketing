@@ -1,9 +1,6 @@
 import express, { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
-// import app from '../index';
-
-// isChanged, isNew, isPopulated
 
 interface UserRequest extends Request {
   isChanged?: boolean;
