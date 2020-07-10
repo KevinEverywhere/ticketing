@@ -1,6 +1,11 @@
 import express, { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
+import {
+  validateRequest,
+  BadRequestError,
+  RequestValidationError,
+} from '@sharedcontainerlibrary/common';
 
 interface UserRequest extends Request {
   isChanged?: boolean;
@@ -9,8 +14,8 @@ interface UserRequest extends Request {
 }
 
 import { User } from '../models/user';
-import { RequestValidationError } from '../errors/request-validation-error';
-import { BadRequestError } from '../errors/bad-request-error';
+// import { RequestValidationError } from '../../../common/src/errors/request-validation-error';
+// import { BadRequestError } from '../../../common/src/errors/bad-request-error';
 
 const router = express.Router();
 
@@ -23,6 +28,7 @@ router.post(
       .isLength({ min: 4, max: 20 })
       .withMessage('Password must be between 4 and 20 characters'),
   ],
+  validateRequest,
   async (req: UserRequest, res: Response) => {
     const errors = validationResult(req);
 
