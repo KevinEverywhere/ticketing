@@ -14,7 +14,8 @@ declare global {
 let mongo: MongoMemoryServer;
 
 beforeAll(async () => {
-  process.env.JWT_KEY = 'oicurn0tmt'; // This should be replaced with function/lookup
+  process.env.JWT_KEY = 'oicurn0tmt';
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   mongo = new MongoMemoryServer();
   const mongoUri = await mongo.getUri();
   await mongoose.connect(mongoUri, {
