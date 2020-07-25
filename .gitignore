@@ -5,4 +5,6 @@ common/
 tickets/
 orders/
 nats-test/
+payments/
+expiration/
 t/
