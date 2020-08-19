@@ -7,15 +7,7 @@ import {
   RequestValidationError,
 } from '@sharedcontainerlibrary/common';
 
-interface UserRequest extends Request {
-  isChanged?: boolean;
-  isNew?: boolean;
-  isPopulated?: boolean;
-}
-
 import { User } from '../models/user';
-// import { RequestValidationError } from '../../../common/src/errors/request-validation-error';
-// import { BadRequestError } from '../../../common/src/errors/bad-request-error';
 
 const router = express.Router();
 
@@ -29,13 +21,7 @@ router.post(
       .withMessage('Password must be between 4 and 20 characters'),
   ],
   validateRequest,
-  async (req: UserRequest, res: Response) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
-
+  async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });

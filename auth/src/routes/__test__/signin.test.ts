@@ -1,10 +1,8 @@
 import request from 'supertest';
 import { app } from '../../app';
-// import { response } from 'express';
 
 it('fails when an email that does not exist is supplied', async () => {
   await request(app)
-    // bad email
     .post('/api/users/signin')
     .send({
       email: 'notexisting@test.com',
@@ -21,6 +19,7 @@ it('fails when an incorrect password is supplied', async () => {
       password: 'password',
     })
     .expect(201);
+
   await request(app)
     .post('/api/users/signin')
     .send({
@@ -38,6 +37,7 @@ it('responds with a cookie when given valid credentials', async () => {
       password: 'password',
     })
     .expect(201);
+
   const response = await request(app)
     .post('/api/users/signin')
     .send({
@@ -45,5 +45,6 @@ it('responds with a cookie when given valid credentials', async () => {
       password: 'password',
     })
     .expect(200);
+
   expect(response.get('Set-Cookie')).toBeDefined();
 });
