@@ -21,8 +21,15 @@ const header = ({ currentUser }) => {
       <Link href="/">
         <a className="navbar-brand">GitTix</a>
       </Link>
-      <div className="d-flex justify-content-end">
-        <ul className="nav d-flex align-items-center">{links}</ul>
+      <div className="d-flex">
+        <ul className="nav d-flex align-items-center">
+          {links}
+          {currentUser && currentUser.email && (
+            <li key={currentUser.email} className="nav-item">
+              {currentUser.email}
+            </li>
+          )}
+        </ul>
       </div>
     </nav>
   );
