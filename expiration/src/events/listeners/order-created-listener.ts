@@ -12,9 +12,9 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: OrderCreatedEvent['data'], msg: Message) {
-    // the length of the delay impacts the expiration service
-    const delay = new Date().getTime() + 15 * 1000;
+    const delay = new Date(data.expiresAt).getTime() - new Date().getTime();
     console.log('Waiting this many milliseconds to process the job:', delay);
+
     await expirationQueue.add(
       {
         orderId: data.id,
