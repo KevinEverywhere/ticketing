@@ -6,7 +6,7 @@ name: tests
 # events but only for the master branch
 on:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
   # This workflow contains a single job called "build"
   build:
@@ -14,5 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run a multi-line script
       - run: cd auth && npm install && npm run test:ci
